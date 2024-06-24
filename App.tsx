@@ -2,7 +2,6 @@ import TabNavigation from "@/src/screens/navigation/tabs";
 import AuthNavigation from "@/src/screens/navigation/auth";
 import { screenOptions } from "@/src/contants/screenOptions";
 
-import { View, Text } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -15,11 +14,12 @@ function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar style="auto" />
       <Stack.Navigator screenOptions={screenOptions}>
         {authSession ? (
-          <Stack.Screen name="tabs" component={TabNavigation} />
+          <Stack.Screen name="Tabs" component={TabNavigation} />
         ) : (
-          <Stack.Screen name="auth" component={AuthNavigation} />
+          <Stack.Screen name="Auth" component={AuthNavigation} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
