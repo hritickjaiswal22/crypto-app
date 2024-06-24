@@ -13,7 +13,7 @@ import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const { height } = Dimensions.get("window");
 
