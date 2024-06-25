@@ -1,5 +1,7 @@
 // import SplashScreen from "@/src/components/SplashScreen";
 import Button from "@/src/components/Button";
+import { supabase } from "@/supabaseConfig";
+import { validateEmail, validatePassword } from "@/src/utils/validationUtils";
 
 import {
   View,
@@ -8,6 +10,8 @@ import {
   Dimensions,
   TextInput,
   Pressable,
+  AppState,
+  Alert,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
@@ -17,6 +21,14 @@ import { useState } from "react";
 
 const { height } = Dimensions.get("window");
 
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
+
 function RegisterScreen() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -25,6 +37,41 @@ function RegisterScreen() {
   });
 
   const { navigate }: NavigationProp<AuthNavigation> = useNavigation();
+
+  async function signUpWithEmail() {
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp(form);
+
+    if (error) Alert.alert("Error", error.message);
+
+    if (!session)
+      Alert.alert(
+        "Registered successfully",
+        "Please check your inbox for email verification!"
+      );
+
+    setLoading(false);
+  }
+
+  function signupHandler() {
+    if (!validateEmail(form.email)) {
+      Alert.alert("Invalid email");
+      return;
+    }
+
+    if (!validatePassword(form.password)) {
+      Alert.alert(
+        "Invalid passowrd",
+        "Password must have a min of 8 letters, with at least a symbol, upper and lower case letters and a number"
+      );
+      return;
+    }
+
+    signUpWithEmail();
+  }
 
   return (
     <>
@@ -96,10 +143,7 @@ function RegisterScreen() {
                 className="py-4"
                 entering={FadeInDown.delay(300).duration(100).springify()}
               >
-                <Button
-                  text="Register"
-                  onPressHandler={() => console.log("Pressed")}
-                />
+                <Button text="Register" onPressHandler={signupHandler} />
               </Animated.View>
             </Animated.View>
           </View>

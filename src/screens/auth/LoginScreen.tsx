@@ -1,5 +1,7 @@
-// import SplashScreen from "@/src/components/SplashScreen";
 import Button from "@/src/components/Button";
+import { supabase } from "@/supabaseConfig";
+import { validateEmail } from "@/src/utils/validationUtils";
+import useUserStore from "@/src/store/useUserStore";
 
 import {
   View,
@@ -8,6 +10,8 @@ import {
   Dimensions,
   TextInput,
   Pressable,
+  AppState,
+  Alert,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
@@ -17,26 +21,48 @@ import { useState } from "react";
 
 const { height } = Dimensions.get("window");
 
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
+
 function LoginScreen() {
-  // const [showSplashScreen, setShowSplashScreen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+  const { setUser, setSession, setIsLoggedIn } = useUserStore();
 
   const { navigate }: NavigationProp<AuthNavigation> = useNavigation();
 
-  // useEffect(() => {
-  //   setTimeout(() => setShowSplashScreen(false), 3000);
-  // }, []);
+  async function signInWithEmail() {
+    setLoading(true);
 
-  // if (showSplashScreen)
-  //   return (
-  //     <SafeAreaView>
-  //       <SplashScreen />
-  //     </SafeAreaView>
-  //   );
+    const { error, data } = await supabase.auth.signInWithPassword(form);
+
+    if (error) Alert.alert("Error", error.message);
+
+    if (data.session && data.user) {
+      setSession(data.session);
+      setUser(data.user);
+      setIsLoggedIn(true);
+    }
+
+    setLoading(false);
+  }
+
+  function signinHandler() {
+    if (!validateEmail(form.email)) {
+      Alert.alert("Invalid email");
+      return;
+    }
+
+    signInWithEmail();
+  }
 
   return (
     <>
@@ -108,10 +134,7 @@ function LoginScreen() {
                 className="py-4"
                 entering={FadeInDown.delay(300).duration(100).springify()}
               >
-                <Button
-                  text="Login"
-                  onPressHandler={() => console.log("Pressed")}
-                />
+                <Button text="Login" onPressHandler={signinHandler} />
               </Animated.View>
             </Animated.View>
           </View>
