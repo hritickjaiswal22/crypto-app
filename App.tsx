@@ -1,9 +1,9 @@
 import TabNavigation from "@/src/screens/navigation/tabs";
 import AuthNavigation from "@/src/screens/navigation/auth";
-import { screenOptions } from "@/src/contants/screenOptions";
+import { screenOptions } from "@/src/screens/navigation/screenOptions";
 import useUserStore from "@/src/store/useUserStore";
 
-import React, { useState } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";

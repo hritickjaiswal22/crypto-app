@@ -1,6 +1,6 @@
 import LoginScreen from "@/src/screens/auth/LoginScreen";
 import RegisterScreen from "@/src/screens/auth/RegisterScreen";
-import { screenOptions } from "@/src/contants/screenOptions";
+import { screenOptions } from "../screenOptions";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
