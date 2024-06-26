@@ -1,6 +1,7 @@
 import Avatar from "@/src/components/Avatar";
 import { supabase } from "@/supabaseConfig";
 import useUserStore from "@/src/store/useUserStore";
+import { getAllCoins } from "@/src/api/coinRankingApi";
 
 import {
   View,
@@ -15,10 +16,10 @@ import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
-import { getAllCoins } from "@/src/api/coinRankingApi";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Image } from "expo-image";
 import numeral from "numeral";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 interface Coin {
   uuid: string;
@@ -42,6 +43,8 @@ function HomeScreen() {
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const { session } = useUserStore();
+
+  const { navigate }: NavigationProp<HomeNavigation> = useNavigation();
 
   async function handleGetProfile() {
     setLoading(true);
@@ -75,7 +78,14 @@ function HomeScreen() {
 
   const renderItem = ({ index, item }: { item: Coin; index: number }) => {
     return (
-      <Pressable className="flex-row w-full py-4 items-center">
+      <Pressable
+        className="flex-row w-full py-4 items-center"
+        onPress={() =>
+          navigate("CoinDetails", {
+            coinUuid: item.uuid,
+          })
+        }
+      >
         <Animated.View
           entering={FadeInDown.duration(100)
             .delay(index * 200)
