@@ -1,9 +1,9 @@
-import HomeScreen from "@/src/screens/tabs/HomeScreen";
-import MarketScreen from "@/src/screens/tabs/MarketScreen";
-import NewsScreen from "@/src/screens/tabs/NewsScreen";
-import ProfileScreen from "@/src/screens/tabs/ProfileScreen";
-import SearchScreen from "@/src/screens/tabs/SearchScreen";
 import { screenOptions } from "../screenOptions";
+import HomeNavigation from "./HomeNavigation";
+import MarketNavigation from "./MarketNavigation";
+import SearchNavigation from "./SearchNavigation";
+import NewsNavigation from "./NewsNavigation";
+import ProfileNavigation from "./ProfileNavigation";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -49,11 +49,11 @@ function TabNavigation() {
         };
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Market" component={MarketScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="News" component={NewsScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Home" component={HomeNavigation} />
+      <Tab.Screen name="Market" component={MarketNavigation} />
+      <Tab.Screen name="Search" component={SearchNavigation} />
+      <Tab.Screen name="News" component={NewsNavigation} />
+      <Tab.Screen name="Profile" component={ProfileNavigation} />
     </Tab.Navigator>
   );
 }
