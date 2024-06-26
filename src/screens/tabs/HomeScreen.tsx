@@ -168,7 +168,7 @@ function HomeScreen() {
           contentContainerStyle={{ paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className="px-4 py-8 items-center">
+          <View className="px-4 py-4 items-center">
             {isAllCoinsLoading ? (
               <ActivityIndicator size="large" color="black" />
             ) : (
