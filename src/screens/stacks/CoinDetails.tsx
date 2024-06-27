@@ -61,10 +61,19 @@ function CoinDetailsScreen() {
 
   useEffect(() => {
     if (CoinHistory && CoinHistory.data.history) {
+      let prevPrice = 0;
+      let prevTimestamp = 0;
+
       const datasets = CoinHistory.data.history.map((item) => {
+        const price = parseFloat(item.price as string);
+        const timestamp = item.timestamp;
+
+        if (price) prevPrice = price;
+        if (timestamp) prevTimestamp = timestamp;
+
         return {
-          price: parseFloat(item.price as string),
-          timestamp: item.timestamp,
+          price: price || prevPrice,
+          timestamp: timestamp || prevTimestamp,
         };
       });
 
