@@ -6,19 +6,30 @@ import {
   History,
   CoinDetails,
 } from "@/src/api/coinRankingApi";
+import { HomeNavigation } from "@/types/navigation";
 
 import { View, Text, Pressable, ActivityIndicator } from "react-native";
-import { useRoute } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import numeral from "numeral";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
+import {
+  useNavigation,
+  NavigationProp,
+  useRoute,
+  RouteProp,
+} from "@react-navigation/native";
 import { CartesianChart, useChartPressState, Line } from "victory-native";
 import { Circle, useFont } from "@shopify/react-native-skia";
 import Animated, { FadeInDown, SharedValue } from "react-native-reanimated";
+
+type ParamList = {
+  CoinDetails: {
+    coinUuid: string;
+  };
+};
 
 function CoinDetailsScreen() {
   const [lineData, setLineData] = useState<Array<History>>([]);
@@ -28,7 +39,7 @@ function CoinDetailsScreen() {
 
   const {
     params: { coinUuid },
-  } = useRoute();
+  } = useRoute<RouteProp<ParamList, "CoinDetails">>();
 
   const { isActive, state } = useChartPressState({
     x: 0,
