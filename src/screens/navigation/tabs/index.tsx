@@ -3,8 +3,7 @@ import HomeNavigation from "./HomeNavigation";
 import NewsNavigation from "./NewsNavigation";
 import MarketScreen from "@/src/screens/tabs/MarketScreen";
 import SearchScreen from "@/src/screens/tabs/SearchScreen";
-
-import ProfileNavigation from "./ProfileNavigation";
+import ProfileScreen from "@/src/screens/tabs/ProfileScreen";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -54,7 +53,7 @@ function TabNavigation() {
       <Tab.Screen name="Market" component={MarketScreen} />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="News" component={NewsNavigation} />
-      <Tab.Screen name="Profile" component={ProfileNavigation} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
