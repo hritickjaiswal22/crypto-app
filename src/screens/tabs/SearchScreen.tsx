@@ -1,4 +1,5 @@
 import { searchCoins } from "@/src/api/coinRankingApi";
+import { HomeNavigation } from "@/types/navigation";
 
 import { useCallback, useState } from "react";
 import {
