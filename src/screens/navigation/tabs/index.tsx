@@ -1,7 +1,7 @@
 import { screenOptions } from "../screenOptions";
 import HomeNavigation from "./HomeNavigation";
 import MarketScreen from "@/src/screens/tabs/MarketScreen";
-import SearchNavigation from "./SearchNavigation";
+import SearchScreen from "@/src/screens/tabs/SearchScreen";
 import NewsNavigation from "./NewsNavigation";
 import ProfileNavigation from "./ProfileNavigation";
 
@@ -51,7 +51,7 @@ function TabNavigation() {
     >
       <Tab.Screen name="Home" component={HomeNavigation} />
       <Tab.Screen name="Market" component={MarketScreen} />
-      <Tab.Screen name="Search" component={SearchNavigation} />
+      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="News" component={NewsNavigation} />
       <Tab.Screen name="Profile" component={ProfileNavigation} />
     </Tab.Navigator>

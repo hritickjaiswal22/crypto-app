@@ -109,5 +109,12 @@ async function getCoinHistory(coinUuid: string): Promise<HistoryData> {
   });
 }
 
-export { getAllCoins, getCoinDetails, getCoinHistory };
+async function searchCoins(query: string) {
+  return await CoinsApiCall(`${baseUrl}/search-suggestions`, {
+    referenceCurrencyUuid: "yhjMzLPhuIDl",
+    query,
+  });
+}
+
+export { getAllCoins, getCoinDetails, getCoinHistory, searchCoins };
 export type { CoinDetails, CoinDetailsData, History, HistoryData };
