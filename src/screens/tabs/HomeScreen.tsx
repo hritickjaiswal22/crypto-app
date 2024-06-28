@@ -2,6 +2,7 @@ import Avatar from "@/src/components/Avatar";
 import { supabase } from "@/supabaseConfig";
 import useUserStore from "@/src/store/useUserStore";
 import { getAllCoins } from "@/src/api/coinRankingApi";
+import { HomeNavigation } from "@/types/navigation";
 
 import {
   View,

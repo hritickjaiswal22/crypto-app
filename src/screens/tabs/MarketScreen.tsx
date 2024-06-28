@@ -1,7 +1,5 @@
-import Avatar from "@/src/components/Avatar";
-import { supabase } from "@/supabaseConfig";
-import useUserStore from "@/src/store/useUserStore";
 import { getAllCoins } from "@/src/api/coinRankingApi";
+import { HomeNavigation } from "@/types/navigation";
 
 import {
   View,
@@ -12,9 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useCallback, useEffect, useState } from "react";
-import { useFocusEffect } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Image } from "expo-image";

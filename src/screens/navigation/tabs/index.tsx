@@ -1,8 +1,9 @@
 import { screenOptions } from "../screenOptions";
 import HomeNavigation from "./HomeNavigation";
+import NewsNavigation from "./NewsNavigation";
 import MarketScreen from "@/src/screens/tabs/MarketScreen";
 import SearchScreen from "@/src/screens/tabs/SearchScreen";
-import NewsNavigation from "./NewsNavigation";
+
 import ProfileNavigation from "./ProfileNavigation";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
